@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+ant build
+java -cp "build/lcdjni-examples.jar;lcdjni.jar" net.djpowell.lcdjni.examples.HelloWorld
