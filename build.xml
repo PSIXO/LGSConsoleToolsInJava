@@ -1,31 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="lcdjni-java-examples" default="build">
 
-    <target  name="clean" description="clean build">
+    <target name="clean" description="clean build">
         <delete dir="build" />
     </target>
 
     <target name="build-api">
         <ant dir="../java" />
     </target>
-    
+
     <target name="build" depends="jar" />
 
-    <target name="compile" description="compile java code" depends="build-api">
+    <target name="compile" depends="build-api" description="compile java code">
         <mkdir dir="build/classes" />
-        <javac destdir="build/classes" debug="true">
+        <javac debug="true" destdir="build/classes">
             <classpath path="../java/build/lcdjni.jar" />
             <src path="src" />
         </javac>
     </target>
 
-    <target name="jar" description="build jar file" depends="compile">
+    <!--<target name="jar" depends="compile" description="build jar file">
         <mkdir dir="build" />
-        <jar destfile="lcd.jar">
+        <jar destfile="lcd-image.jar">
             <fileset dir="build/classes" />
-			    <manifest>
-		<attribute name="Main-Class" value="net.djpowell.lcdjni.examples.HelloWorld" />
-    </manifest>
+            <manifest>
+                <attribute name="Main-Class" value="net.djpowell.lcdjni.examples.LCDImage" />
+            </manifest>
+        </jar>
+    </target>-->
+
+    <target name="jar" depends="compile" description="build jar file">
+        <mkdir dir="build" />
+        <jar destfile="lcd-text.jar">
+            <fileset dir="build/classes" />
+            <manifest>
+                <attribute name="Main-Class" value="net.djpowell.lcdjni.examples.LCDText" />
+            </manifest>
         </jar>
     </target>
 

@@ -10,10 +10,6 @@ import net.djpowell.lcdjni.Priority;
 import net.djpowell.lcdjni.SyncType;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-
-import javax.imageio.ImageIO;
 
 
 /**
@@ -25,34 +21,30 @@ import javax.imageio.ImageIO;
 public class LCDText {
 
     public static void main(String[] args) throws Exception {
-        //img 160 x 43
-        String url = null;
+
+        String text = null;
         int time = 2000;
 
         if (args.length > 0) {
-            url = args[0];
+            text = args[0];
         }
         if (args.length > 1) {
             time = Integer.parseInt(args[1]);
         }
 
-        LcdConnection con = new LcdConnection("LCDImage", false, AppletCapability.getCaps(AppletCapability.BW), null, null);
+        LcdConnection con = new LcdConnection("HelloWorldMono", false, AppletCapability.getCaps(AppletCapability.BW), null, null);
         try {
             LcdDevice device = con.openDevice(DeviceType.BW, null);
             try {
-                LcdMonoBitmap bmp = device.createMonoBitmap(PixelColor.G15_REV_1);
-                BufferedImage img = ImageIO.read(new File(url));
-                device.setForeground(true);
-
-                Graphics2D g = (Graphics2D) bmp.getGraphics();
+                LcdMonoBitmap bmp = device.createMonoBitmap(PixelColor.G15_REV_2);
+                Graphics g = bmp.getGraphics();
                 g.setColor(bmp.UNLIT);
                 g.fillRect(0, 0, bmp.getImage().getWidth(), bmp.getImage().getHeight());
                 g.setColor(bmp.LIT);
-                g.drawImage(img, 80-img.getWidth()/2, 22-img.getHeight()/2, null);
+                g.drawString(text, 40, 20);
                 g.dispose();
-
                 bmp.updateScreen(Priority.ALERT, SyncType.SYNC);
-
+                device.setForeground(true);
                 Thread.sleep(time);
             } finally {
                 device.close();

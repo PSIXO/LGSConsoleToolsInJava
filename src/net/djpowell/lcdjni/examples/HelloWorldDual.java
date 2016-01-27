@@ -9,7 +9,7 @@ import net.djpowell.lcdjni.LcdRGBABitmap;
 import java.awt.*;
 
 /**
- * Dual-Mode HelloWorld demo.
+ * Dual-Mode LCDImage demo.
  * Works on both G15 and G19 keyboards.
  *
  * @author David Powell

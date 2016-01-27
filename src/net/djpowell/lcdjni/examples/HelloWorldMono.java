@@ -6,7 +6,7 @@ import net.djpowell.lcdjni.LcdMonoBitmap;
 import java.awt.*;
 
 /**
- * Monochrome HelloWorld demo.
+ * Monochrome LCDImage demo.
  *
  * @author David Powell
  * @since 05-Apr-2010
